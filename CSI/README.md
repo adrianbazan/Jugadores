@@ -1,2 +1,0 @@
-# Jugadores
-Proyectos DE CSI
