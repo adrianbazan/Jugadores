@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-10-2015 a las 12:38:22
+-- Tiempo de generación: 29-10-2015 a las 15:47:20
 -- Versión del servidor: 5.6.17
 -- Versión de PHP: 5.5.12
 
@@ -80,15 +80,22 @@ INSERT INTO `dimensiones` (`id`, `id_Estudios`, `nombre`) VALUES
 CREATE TABLE IF NOT EXISTS `encuestasrellenas` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_Estudios` int(11) NOT NULL,
-  `hora_comienzo` int(11) NOT NULL,
-  `hora_fin` int(11) NOT NULL,
+  `hora_comienzo` text COLLATE utf8_spanish_ci NOT NULL,
+  `hora_fin` text COLLATE utf8_spanish_ci NOT NULL,
   `ip` tinytext COLLATE utf8_spanish_ci,
-  `direccion` text COLLATE utf8_spanish_ci,
   `referer` text COLLATE utf8_spanish_ci,
-  `userAgent` text COLLATE utf8_spanish_ci,
   PRIMARY KEY (`id`),
   KEY `id_Estudios` (`id_Estudios`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=28 ;
+
+--
+-- Volcado de datos para la tabla `encuestasrellenas`
+--
+
+INSERT INTO `encuestasrellenas` (`id`, `id_Estudios`, `hora_comienzo`, `hora_fin`, `ip`, `referer`) VALUES
+(25, 1, '03:29:13', '03:29:15', '::1', NULL),
+(26, 1, '03:32:39', '03:32:49', '::1', NULL),
+(27, 1, '03:32:57', '03:32:58', '::1', NULL);
 
 -- --------------------------------------------------------
 
@@ -222,7 +229,79 @@ CREATE TABLE IF NOT EXISTS `respuestas` (
   PRIMARY KEY (`id`),
   KEY `id_Preguntas` (`id_Preguntas`),
   KEY `id_EncuestasRellenas` (`id_EncuestasRellenas`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=55 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1457 ;
+
+--
+-- Volcado de datos para la tabla `respuestas`
+--
+
+INSERT INTO `respuestas` (`id`, `id_EncuestasRellenas`, `id_Preguntas`, `respuesta`) VALUES
+(1391, 25, 1, 'PAS'),
+(1392, 25, 2, 'Puerto Real'),
+(1393, 25, 3, 'Campus Pto Real'),
+(1394, 25, 4, 'Hombre'),
+(1395, 25, 5, '0'),
+(1396, 25, 6, '0'),
+(1397, 25, 7, '0'),
+(1398, 25, 8, '0'),
+(1399, 25, 9, '0'),
+(1400, 25, 10, '0'),
+(1401, 25, 11, '0'),
+(1402, 25, 12, '0'),
+(1403, 25, 13, '0'),
+(1404, 25, 14, '0'),
+(1405, 25, 15, '0'),
+(1406, 25, 16, '0'),
+(1407, 25, 17, '0'),
+(1408, 25, 18, '0'),
+(1409, 25, 19, '0'),
+(1410, 25, 20, '0'),
+(1411, 25, 21, '0'),
+(1412, 25, 22, '0'),
+(1413, 26, 1, 'PAS'),
+(1414, 26, 2, 'Puerto Real'),
+(1415, 26, 3, 'Campus Pto Real'),
+(1416, 26, 4, 'Hombre'),
+(1417, 26, 5, '0'),
+(1418, 26, 6, '0'),
+(1419, 26, 7, '0'),
+(1420, 26, 8, '4'),
+(1421, 26, 9, '0'),
+(1422, 26, 10, '3'),
+(1423, 26, 11, '0'),
+(1424, 26, 12, '0'),
+(1425, 26, 13, '0'),
+(1426, 26, 14, '0'),
+(1427, 26, 15, '1'),
+(1428, 26, 16, '0'),
+(1429, 26, 17, '0'),
+(1430, 26, 18, '0'),
+(1431, 26, 19, '0'),
+(1432, 26, 20, '0'),
+(1433, 26, 21, '0'),
+(1434, 26, 22, '0'),
+(1435, 27, 1, 'PAS'),
+(1436, 27, 2, 'Puerto Real'),
+(1437, 27, 3, 'Campus Pto Real'),
+(1438, 27, 4, 'Hombre'),
+(1439, 27, 5, '0'),
+(1440, 27, 6, '0'),
+(1441, 27, 7, '0'),
+(1442, 27, 8, '0'),
+(1443, 27, 9, '0'),
+(1444, 27, 10, '0'),
+(1445, 27, 11, '0'),
+(1446, 27, 12, '0'),
+(1447, 27, 13, '0'),
+(1448, 27, 14, '0'),
+(1449, 27, 15, '0'),
+(1450, 27, 16, '0'),
+(1451, 27, 17, '0'),
+(1452, 27, 18, '0'),
+(1453, 27, 19, '0'),
+(1454, 27, 20, '0'),
+(1455, 27, 21, '0'),
+(1456, 27, 22, '0');
 
 -- --------------------------------------------------------
 
