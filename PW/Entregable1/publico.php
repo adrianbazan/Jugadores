@@ -1,17 +1,44 @@
 <HTML LANG="es">
 
 <HEAD>
+
    <TITLE>Encuesta</TITLE>
+   <style type="text/css">
+	body {background-color:#f0fcfb;}
+	
+	div#BODY2{
+		padding :20px 0px 0px 30px;
+		font-family:verdana,arial;
+		font-size:9pt;
+		}
+	h1{
+		color:#03897e;
+		text+align:center;
+		margin-top:30px;
+		}
+	
+	p{
+		font-family:verdana,arial;
+		width: 500px;
+		font-size:12pt;
+		color:#008000;
+		border: 1px dotted red;
+		}
+	div#boton{
+		margin:20px 150px 20px 150px;
+		}
+   </style>
 </HEAD>
 
 <BODY>
-
+<div id="BODY2">
+<h1>Encuesta de satisfaccion</h1>
+<p>
 <?PHP
-
   error_reporting(~E_ALL & ~E_NOTICE);
   $enviar = $_POST['enviar'];
-  $conexion = mysql_connect("localhost","root","") or die ("No se puede conectar con el servidor");
-  mysql_select_db("encuestas") or die ("La base de datos no existe");
+  $conexion = mysql_connect("localhost","root","bazan") or die ("No se puede conectar con el servidor");
+  mysql_select_db("Encuestas") or die ("La base de datos no existe");
   $instruccion = "select * from preguntas";
   $consulta = mysql_query($instruccion, $conexion);
   $filas = mysql_num_rows($consulta);
@@ -44,7 +71,12 @@
     print('<input type = "hidden" name = "fechainicio" value ='.$horainicio.' />');
     for($i = 0; $i < $filas; $i++){
       $res = mysql_fetch_array($consulta);
-      print($res['pregunta']."\t");
+     
+     
+     
+     ////////////////////////////////////
+     
+      echo '<p>'.($res['pregunta']."\t")."</p>";
       print('<select name = "s'.$i.'">');
       if($res['id_Dimensiones'] == 1){
         $consulta2 = mysql_query("select * from opciones where id_preguntas =".$res['id'],$conexion);
@@ -61,10 +93,11 @@
       }
       print("</select></br>");
     }
-    print('</br><input type="submit" name="enviar" value="Enviar">');
+    echo '<div id="boton"'.('</br><input type="submit" name="enviar" value="Enviar">'."</div>");
     print("</form>");
   }
 ?>
-
+</p>
+</div>
 </BODY>
 </HTML>
