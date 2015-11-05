@@ -53,13 +53,25 @@
     $resultado = mysql_fetch_array($consulta);
     $id = $resultado['maximo'];
     if(!$result) echo mysql_error();
+    
+    //inserto en la bd las preguntas
+    //hago independientemente la insercion de la dimension 5 de las demas
+    $instruccion = "select * from preguntas";
+	$consulta = mysql_query($instruccion, $conexion);
     for($i=0;$i<$filas;$i++){
-      $voto = $_POST['s'.$i];
-      $instruccion = "insert into respuestas (id_encuestasrellenas,id_Preguntas,respuesta) values ($id,$i+1,'$voto');";
-      $result = mysql_query($instruccion,$conexion);
-      if (!$result) {print("Error en MySQL");}
-      print($array[$i]);
-
+		$result = mysql_fetch_array($consulta);
+		if($result['id_Dimensiones']==5)
+		{
+			$voto = $_POST['comentario'];
+		}		
+		else
+		{
+			$voto = $_POST['s'.$i];
+		} 
+		$instruccion = "insert into respuestas (id_encuestasrellenas,id_Preguntas,respuesta) values ($id,$i+1,'$voto');";
+		$result = mysql_query($instruccion,$conexion);
+		if (!$result) {print("Error en MySQL");}
+		print($array[$i]);
     }
 
     print("<h1>Registrado</h1>");
@@ -77,8 +89,9 @@
      ////////////////////////////////////
      
       echo '<p>'.($res['pregunta']."\t")."</p>";
-      print('<select name = "s'.$i.'">');
+      
       if($res['id_Dimensiones'] == 1){
+		print('<select name = "s'.$i.'">');
         $consulta2 = mysql_query("select * from opciones where id_preguntas =".$res['id'],$conexion);
         $filas2 = mysql_num_rows($consulta2);
         for($j = 0; $j < $filas2; $j++){
@@ -86,13 +99,18 @@
           print('<option value="'.$res2['nombre'].'">'.$res2['nombre']."</option>");
         }
       }
-      else{
+      else if ($res['id_Dimensiones'] == 2 or $res['id_Dimensiones'] == 3 or $res['id_Dimensiones'] == 4){
+        print('<select name = "s'.$i.'">');
         for($j = 0; $j < 10; $j++){
           print('<option value="'.$j.'">'.$j."</option>");
         }
       }
       print("</select></br>");
     }
+    if($res['id_Dimensiones'] == 5)
+      {
+		  print('<textarea name="comentario" cols="50" rows="4"></textarea>');
+	  }
     echo '<div id="boton"'.('</br><input type="submit" name="enviar" value="Enviar">'."</div>");
     print("</form>");
   }
